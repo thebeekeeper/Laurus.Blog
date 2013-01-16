@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Laurus.Blog.Service.DataContract.Blog>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>blogs!</h2>
+@foreach(var b in Model) {
+    <p>@Html.ActionLink(b.Title, "Details", new RouteValueDictionary(new {Id = b.Id}))</p>
+    @*<p>@b.Title</p>*@
+}
