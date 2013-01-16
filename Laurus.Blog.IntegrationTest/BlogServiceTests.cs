@@ -20,6 +20,17 @@ namespace Laurus.Blog.IntegrationTest
             Container.Release(blogService);
         }
 
+		[TestMethod]
+		public void Create_And_Read_Blog()
+		{
+            var blogService = Container.Resolve<IBlogService>();
+            blogService.CreateBlog(new Service.DataContract.Blog() { Title = "this is another test blog", Id = 0 });
+            Assert.IsTrue(blogService.ListBlogs().Any(b => b.Id == 0));
+			var storedBlog = blogService.GetBlog(0);
+			Assert.IsNotNull(storedBlog);
+            Container.Release(blogService);
+		}
+
         [TestMethod]
         public void Create_Entry_Should_Save()
         {
@@ -29,6 +40,7 @@ namespace Laurus.Blog.IntegrationTest
 			var entry = new Service.DataContract.Entry() { Title = "asdf", Content = "this is a blog entry body" };
 			blogService.AddEntry(blog, entry);
 			var allEntries = blogService.GetAllEntries();
+			// this will fail - there's a bug
 			Assert.IsTrue(allEntries.Where(x => x.Title.Equals("asdf") && x.Content.Equals("this is a blog entry body")).Count() == 1);
 			Container.Release(blogService);
         }

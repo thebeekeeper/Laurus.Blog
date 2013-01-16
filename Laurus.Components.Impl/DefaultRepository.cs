@@ -20,16 +20,12 @@ namespace Laurus.Components.Impl
 
         IQueryable<T> IRepository.Query<T>()
         {
-            return _db.Values.Cast<T>().AsQueryable();
+            return _db.Values.Where(x => x.GetType() == typeof(T)).Cast<T>().AsQueryable();
         }
 
         int IRepository.Persist<T>(T entity)
         {
             int id = 0;
-            if (_db.Keys.Count > 0)
-            {
-                id = _db.Keys.Max() + 1;
-            }
             _db[id] = entity;
             return id;
         }

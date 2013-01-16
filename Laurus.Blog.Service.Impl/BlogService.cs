@@ -72,6 +72,16 @@ namespace Laurus.Blog.Service.Impl
 				   };
 		}
 
+		DataContract.Blog IBlogService.GetBlog(int id)
+		{
+			var entity = _repository.Read<Entity.Blog>(id);
+			return new DataContract.Blog()
+			{
+				Title = entity.Title,
+				Id = entity.Id
+			};
+		}
+
         private IRepository _repository;
     }
 }

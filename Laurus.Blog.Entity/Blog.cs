@@ -11,5 +11,10 @@ namespace Laurus.Blog.Entity
         public int Id { get; set; }
         public IEnumerable<Entry> Entries { get; set; }
         public string Title { get; set; }
+
+		public Blog()
+		{
+			Entries = new List<Entry>();
+		}
     }
 }
