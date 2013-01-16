@@ -15,7 +15,8 @@ namespace Laurus.Components.Impl
 
         T IRepository.Read<T>(int id) 
         {
-            return _db.Where(x => x.Key == id).Cast<T>().FirstOrDefault();
+			var value = _db.Where(x => x.Key == id).FirstOrDefault().Value;
+			return (T)value;
         }
 
         IQueryable<T> IRepository.Query<T>()

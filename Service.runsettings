@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RunSettings>
+	<Percepto>
+		<EntryPointAssembly>Laurus.Blog.Service.Impl.dll</EntryPointAssembly>
+		<EntryPointFilter>Blog.Service.Impl</EntryPointFilter>
+		<ResolvePath>C:\Users\ngamroth\Documents\GitHub\Laurus.Blog\Laurus.Blog.IntegrationTest\bin\Debug</ResolvePath>
+		<MappingPath>c:\savo.web\mapping</MappingPath>
+		<BasePath>C:\Users\ngamroth\Documents\GitHub\Laurus.Blog\Laurus.Blog.IntegrationTest\bin\Debug</BasePath>
+	</Percepto>
+</RunSettings>
+

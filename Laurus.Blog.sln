@@ -16,6 +16,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laurus.Blog.IntegrationTest", "Laurus.Blog.IntegrationTest\Laurus.Blog.IntegrationTest.csproj", "{5C0EC7D0-7910-4747-B986-550CD94FA334}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DB9CE1AF-D592-4DA2-A76F-1E23E3C94BAD}"
+	ProjectSection(SolutionItems) = preProject
+		Service.runsettings = Service.runsettings
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
