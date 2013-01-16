@@ -28,6 +28,9 @@ namespace Laurus.Blog.IntegrationTest
             blogService.CreateBlog(blog);
 			var entry = new Service.DataContract.Entry() { Title = "asdf", Content = "this is a blog entry body" };
 			blogService.AddEntry(blog, entry);
+			var allEntries = blogService.GetAllEntries();
+			Assert.IsTrue(allEntries.Where(x => x.Title.Equals("asdf") && x.Content.Equals("this is a blog entry body")).Count() == 1);
+			Container.Release(blogService);
         }
     }
 }

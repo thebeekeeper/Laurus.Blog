@@ -62,6 +62,16 @@ namespace Laurus.Blog.Service.Impl
 			blogEntity.Entries.Concat(new[] { entryEntity });
 		}
 
+		IEnumerable<DataContract.Entry> IBlogService.GetAllEntries()
+		{
+			return from e in _repository.Query<Entity.Entry>().ToList()
+				   select new DataContract.Entry()
+				   {
+					   Title = e.Name,
+					   Content = e.Content,
+				   };
+		}
+
         private IRepository _repository;
     }
 }

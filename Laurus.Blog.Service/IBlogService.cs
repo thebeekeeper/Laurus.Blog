@@ -13,5 +13,6 @@ namespace Laurus.Blog.Service
         int CreateBlog(Laurus.Blog.Service.DataContract.Blog blog);
 		int CreateEntry(DataContract.Entry entry);
 		void AddEntry(DataContract.Blog blog, DataContract.Entry entry);
+		IEnumerable<DataContract.Entry> GetAllEntries();
     }
 }
