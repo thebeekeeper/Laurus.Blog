@@ -25,7 +25,7 @@ namespace Laurus.Blog.Service.Impl
             return blogs.ToList();
         }
 
-        void IBlogService.CreateBlog(Laurus.Blog.Service.DataContract.Blog blog)
+        int IBlogService.CreateBlog(Laurus.Blog.Service.DataContract.Blog blog)
         {
             var entity = new Entity.Blog()
             {
@@ -33,12 +33,34 @@ namespace Laurus.Blog.Service.Impl
                 Id = blog.Id
             };
             _repository.Persist(entity);
+			return entity.Id;
         }
 
-        void IBlogService.CreateEntry(Entity.Entry entry)
+        int IBlogService.CreateEntry(DataContract.Entry entry)
         {
-            _repository.Persist(entry);
+			var entity = new Entity.Entry()
+			{
+				Content = entry.Content,
+				Name = entry.Title,
+				Id = new Random().Next(1000)
+			};
+			return entity.Id;
         }
+
+		void IBlogService.AddEntry(DataContract.Blog blog, DataContract.Entry entry)
+		{
+			var blogEntity = new Entity.Blog()
+			{
+				Title = blog.Title,
+				Id = blog.Id
+			};
+			var entryEntity = new Entity.Entry()
+			{
+				Name = entry.Title,
+				Content = entry.Content
+			};
+			blogEntity.Entries.Concat(new[] { entryEntity });
+		}
 
         private IRepository _repository;
     }

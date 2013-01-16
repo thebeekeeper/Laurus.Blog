@@ -10,7 +10,8 @@ namespace Laurus.Blog.Service
     public interface IBlogService
     {
         IEnumerable<Laurus.Blog.Service.DataContract.Blog> ListBlogs();
-        void CreateBlog(Laurus.Blog.Service.DataContract.Blog blog);
-        void CreateEntry(Entry entry);
+        int CreateBlog(Laurus.Blog.Service.DataContract.Blog blog);
+		int CreateEntry(DataContract.Entry entry);
+		void AddEntry(DataContract.Blog blog, DataContract.Entry entry);
     }
 }
