@@ -37,10 +37,10 @@ namespace Laurus.Blog.IntegrationTest
         public void Create_Entry_Should_Save()
         {
             var blogService = Container.Resolve<IBlogService>();
-			var blog = new Service.DataContract.Blog() { Title = "test blog", Id = 0};
+			var blog = new Service.DataContract.Blog() { Title = "test blog", Id = -1 };
             blogService.CreateBlog(blog);
 			var entry = new Service.DataContract.Entry() { Title = "asdf", Content = "this is a blog entry body" };
-			blogService.AddEntry(0, entry);
+			blogService.AddEntry(-1, entry);
 			var entries = blogService.GetEntriesForBlog(blog.Id);
 			Container.Release(blogService);
         }

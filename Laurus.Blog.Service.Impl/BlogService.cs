@@ -54,7 +54,10 @@ namespace Laurus.Blog.Service.Impl
 				Content = entry.Content,
 				BlogId = blogId
 			};
-			_repository.Persist(entryEntity);
+			if (_repository.Query<Entity.Blog>().Where(x => x.Id == blogId).Any())
+			{
+				_repository.Persist(entryEntity);
+			}
 		}
 
 		IEnumerable<DataContract.Entry> IBlogService.GetAllEntries()
