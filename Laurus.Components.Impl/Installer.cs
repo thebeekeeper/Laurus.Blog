@@ -11,7 +11,7 @@ namespace Laurus.Components.Impl
 	{
 		public void Install(Castle.Windsor.IWindsorContainer container, Castle.MicroKernel.SubSystems.Configuration.IConfigurationStore store)
 		{
-			//container.Register(Component.For<IRepository>().ImplementedBy<DefaultRepository>());
+			container.Register(Component.For<IRepository>().ImplementedBy<NhRepository>());
 		}
 	}
 }
