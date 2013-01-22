@@ -47,7 +47,9 @@ namespace Laurus.Blog
             IWindsorContainer container = new WindsorContainer();
             container.Register(Component.For<HomeController>().ImplementedBy<HomeController>().LifestylePerWebRequest());
             container.Register(Component.For<IBlogService>().ImplementedBy<BlogService>().LifestylePerWebRequest());
-            container.Register(Component.For<IRepository>().ImplementedBy<DefaultRepository>().LifestyleSingleton());
+			//container.Register(Component.For<IRepository>().ImplementedBy<DefaultRepository>().LifestyleSingleton());
+			container.Register(Component.For<IRepository>().ImplementedBy<NhRepository>().LifestylePerWebRequest());
+			container.Register(Component.For<Type>().Instance(typeof(Laurus.Blog.Entity.Blog)));
             DependencyResolver.SetResolver(new WindsorDependencyResolver(container));
 
             RegisterGlobalFilters(GlobalFilters.Filters);

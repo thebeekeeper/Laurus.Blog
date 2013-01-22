@@ -10,6 +10,6 @@ namespace Laurus.Components
     {
         T Read<T>(int id);
         IQueryable<T> Query<T>();
-        int Persist<T>(T entity);
+        void Persist<T>(T entity);
     }
 }

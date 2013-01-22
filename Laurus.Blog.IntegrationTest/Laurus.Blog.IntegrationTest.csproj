@@ -77,6 +77,10 @@
       <Project>{d33b668f-cd1b-4137-93ee-f2160475c34a}</Project>
       <Name>Laurus.Blog.Service</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Laurus.Blog\Laurus.Blog.csproj">
+      <Project>{21ed6bdd-8ed9-4592-b958-6dd53421b497}</Project>
+      <Name>Laurus.Blog</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Laurus.Components.Impl\Laurus.Components.Impl.csproj">
       <Project>{69e169a3-8d8d-4bca-a23c-fe136428bae9}</Project>
       <Name>Laurus.Components.Impl</Name>

@@ -8,9 +8,9 @@ namespace Laurus.Blog.Entity
 {
     public class Blog
     {
-        public int Id { get; set; }
-        public IEnumerable<Entry> Entries { get; set; }
-        public string Title { get; set; }
+        public virtual int Id { get; set; }
+        public virtual IEnumerable<Entry> Entries { get; set; }
+        public virtual string Title { get; set; }
 
 		public Blog()
 		{

@@ -17,7 +17,8 @@ namespace Laurus.Blog.IntegrationTest
         {
             Container = new WindsorContainer();
             Container.Register(Component.For<IBlogService>().ImplementedBy<BlogService>().LifestyleTransient());
-            Container.Register(Component.For<IRepository>().ImplementedBy<DefaultRepository>().LifestyleTransient());
+            Container.Register(Component.For<IRepository>().ImplementedBy<NhRepository>().LifestyleTransient());
+			Container.Register(Component.For<Type>().Instance(typeof(Laurus.Blog.Entity.Blog)));
         }
 
         // don't really do this

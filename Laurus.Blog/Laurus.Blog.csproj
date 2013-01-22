@@ -164,6 +164,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <None Include="Properties\PublishProfiles\test.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -205,6 +206,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Laurus.Blog.Entity\Laurus.Blog.Entity.csproj">
+      <Project>{baba413b-a937-4ac3-9216-48c537e01c5f}</Project>
+      <Name>Laurus.Blog.Entity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Laurus.Blog.Service.Impl\Laurus.Blog.Service.Impl.csproj">
       <Project>{c9e000f0-dde4-42d5-928a-dd936170d5aa}</Project>
       <Name>Laurus.Blog.Service.Impl</Name>

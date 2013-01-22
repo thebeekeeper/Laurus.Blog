@@ -6,31 +6,31 @@ using System.Threading.Tasks;
 
 namespace Laurus.Components.Impl
 {
-    public class DefaultRepository : IRepository
-    {
-        public DefaultRepository()
-        {
-            _db = new Dictionary<int, object>();
-        }
+	//public class DefaultRepository : IRepository
+	//{
+	//	public DefaultRepository()
+	//	{
+	//		_db = new Dictionary<int, object>();
+	//	}
 
-        T IRepository.Read<T>(int id) 
-        {
-			var value = _db.Where(x => x.Key == id).FirstOrDefault().Value;
-			return (T)value;
-        }
+	//	T IRepository.Read<T>(int id) 
+	//	{
+	//		var value = _db.Where(x => x.Key == id).FirstOrDefault().Value;
+	//		return (T)value;
+	//	}
 
-        IQueryable<T> IRepository.Query<T>()
-        {
-            return _db.Values.Where(x => x.GetType() == typeof(T)).Cast<T>().AsQueryable();
-        }
+	//	IQueryable<T> IRepository.Query<T>()
+	//	{
+	//		return _db.Values.Where(x => x.GetType() == typeof(T)).Cast<T>().AsQueryable();
+	//	}
 
-        int IRepository.Persist<T>(T entity)
-        {
-            int id = 0;
-            _db[id] = entity;
-            return id;
-        }
+	//	int IRepository.Persist<T>(T entity)
+	//	{
+	//		int id = 0;
+	//		_db[id] = entity;
+	//		return id;
+	//	}
 
-        private IDictionary<int, object> _db;
-    }
+	//	private IDictionary<int, object> _db;
+    //}
 }

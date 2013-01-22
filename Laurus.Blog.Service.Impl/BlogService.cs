@@ -16,13 +16,13 @@ namespace Laurus.Blog.Service.Impl
 
         IEnumerable<Laurus.Blog.Service.DataContract.Blog> IBlogService.ListBlogs()
         {
-            var blogs = from x in _repository.Query<Entity.Blog>()
+            var blogs = (from x in _repository.Query<Entity.Blog>()
                         select new DataContract.Blog()
                         {
                             Title = x.Title,
                             Id = x.Id
-                        };
-            return blogs.ToList();
+                        }).ToList();
+			return blogs;
         }
 
         int IBlogService.CreateBlog(Laurus.Blog.Service.DataContract.Blog blog)
@@ -30,7 +30,6 @@ namespace Laurus.Blog.Service.Impl
             var entity = new Entity.Blog()
             {
                 Title = blog.Title,
-                Id = blog.Id
             };
             _repository.Persist(entity);
 			return entity.Id;
@@ -47,19 +46,15 @@ namespace Laurus.Blog.Service.Impl
 			return entity.Id;
         }
 
-		void IBlogService.AddEntry(DataContract.Blog blog, DataContract.Entry entry)
+		void IBlogService.AddEntry(int blogId, DataContract.Entry entry)
 		{
-			var blogEntity = new Entity.Blog()
-			{
-				Title = blog.Title,
-				Id = blog.Id
-			};
 			var entryEntity = new Entity.Entry()
 			{
 				Name = entry.Title,
-				Content = entry.Content
+				Content = entry.Content,
+				BlogId = blogId
 			};
-			blogEntity.Entries.Concat(new[] { entryEntity });
+			_repository.Persist(entryEntity);
 		}
 
 		IEnumerable<DataContract.Entry> IBlogService.GetAllEntries()
@@ -69,6 +64,16 @@ namespace Laurus.Blog.Service.Impl
 				   {
 					   Title = e.Name,
 					   Content = e.Content,
+				   };
+		}
+
+		IEnumerable<DataContract.Entry> IBlogService.GetEntriesForBlog(int blogId)
+		{
+			return from b in _repository.Query<Entity.Entry>().Where(e => e.BlogId == blogId)
+				   select new DataContract.Entry()
+				   {
+					   Title = b.Name,
+					   Content = b.Content
 				   };
 		}
 
