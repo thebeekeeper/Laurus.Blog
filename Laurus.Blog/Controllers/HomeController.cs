@@ -15,17 +15,17 @@ namespace Laurus.Blog.Controllers
             _blogService = blogService;
         }
 
-        public ActionResult Index()
+        public ViewResult Index()
         {
             //show blogs
             var allBlogs = _blogService.ListBlogs();
             return View(allBlogs);
         }
 
-        public ActionResult Details(int id)
+        public ViewResult Details(int id)
         {
-            var blog = _blogService.ListBlogs().First(b => b.Id == id);
-            return View(blog);
+			var entries = _blogService.GetEntriesForBlog(id);
+            return View(entries);
         }
 
         public ActionResult Create()

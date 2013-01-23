@@ -1,7 +1,13 @@
-﻿@model Laurus.Blog.Service.DataContract.Blog
+﻿@model IEnumerable<Laurus.Blog.Service.DataContract.Entry>
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>@Model.Title</h2>
+<h2>entries</h2>
+    @foreach (var e in Model)
+    {
+        <li>
+            @e.Title
+        </li>
+    }

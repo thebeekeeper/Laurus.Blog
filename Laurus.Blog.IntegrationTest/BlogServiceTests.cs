@@ -52,7 +52,8 @@ namespace Laurus.Blog.IntegrationTest
 			IRepository x = new NhRepository(t);
 			var blog = new Entity.Blog()
 			{
-				Title = "adsf"
+				Title = "adsf",
+				Entries = new List<Entity.Entry>() { new Entity.Entry() { Name = "asdf", Content = "blah blah blah" } }
 			};
 			x.Persist(blog);
 		}

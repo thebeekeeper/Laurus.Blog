@@ -10,5 +10,6 @@ namespace Laurus.Blog.Service.DataContract
     {
         public int Id { get; set; }
         public string Title { get; set; }
+		public IEnumerable<DataContract.Entry> Entries { get; set; }
     }
 }

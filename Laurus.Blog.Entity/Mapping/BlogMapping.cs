@@ -13,6 +13,9 @@ namespace Laurus.Blog.Entity.Mapping
 		{
 			Id(x => x.Id);
 			Map(x => x.Title);
+			HasMany<Entry>(x => x.Entries)
+				.Inverse()
+				.Cascade.All();
 		}
 	}
 
@@ -23,6 +26,7 @@ namespace Laurus.Blog.Entity.Mapping
 			Id(x => x.Id);
 			Map(x => x.Name);
 			Map(x => x.Content);
+			References(x => x.Blog);
 		}
 	}
 }
