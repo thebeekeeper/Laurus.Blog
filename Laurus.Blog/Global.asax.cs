@@ -1,5 +1,6 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using Laurus.Blog.App_Start;
 using Laurus.Blog.Controllers;
 using Laurus.Blog.Service;
 using Laurus.Blog.Service.Impl;
@@ -12,6 +13,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Optimization;
 using System.Web.Routing;
 
 namespace Laurus.Blog
@@ -21,57 +23,35 @@ namespace Laurus.Blog
 
     public class MvcApplication : System.Web.HttpApplication
     {
-        public static void RegisterGlobalFilters(GlobalFilterCollection filters)
-        {
-            filters.Add(new HandleErrorAttribute());
-        }
-
-        public static void RegisterRoutes(RouteCollection routes)
-        {
-            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
-            routes.MapRoute(
-                "Default", // Route name
-                "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
-            );
-        }
-
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
 
-            // Use LocalDB for Entity Framework by default
-            Database.DefaultConnectionFactory = new SqlConnectionFactory(@"Data Source=(localdb)\v11.0; Integrated Security=True; MultipleActiveResultSets=True");
+            //WebApiConfig.Register(GlobalConfiguration.Configuration);
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
+            AuthConfig.RegisterAuth();
 
             IWindsorContainer container = new WindsorContainer();
-            container.Register(Component.For<HomeController>().ImplementedBy<HomeController>().LifestylePerWebRequest());
-            container.Register(Component.For<IBlogService>().ImplementedBy<BlogService>().LifestylePerWebRequest());
-			//container.Register(Component.For<IRepository>().ImplementedBy<DefaultRepository>().LifestyleSingleton());
+            container.Register(AllTypes.FromThisAssembly().BasedOn(typeof(Controller)).LifestylePerWebRequest());
+            container.Register(Component.For<IBlogService>().ImplementedBy<BlogService>());
 			container.Register(Component.For<IRepository>().ImplementedBy<NhRepository>().LifestylePerWebRequest());
 			container.Register(Component.For<Type>().Instance(typeof(Laurus.Blog.Entity.Blog)));
-            DependencyResolver.SetResolver(new WindsorDependencyResolver(container));
-
-            RegisterGlobalFilters(GlobalFilters.Filters);
-            RegisterRoutes(RouteTable.Routes);
+            ControllerBuilder.Current.SetControllerFactory(new WindsorControllerFactory(container));
         }
     }
 
-    public class WindsorDependencyResolver : IDependencyResolver
+    public class WindsorControllerFactory : DefaultControllerFactory
     {
-        public WindsorDependencyResolver(IWindsorContainer container)
+        public WindsorControllerFactory(IWindsorContainer container)
         {
             _container = container;
         }
 
-        public object GetService(Type serviceType)
+        protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
         {
-            return _container.Kernel.HasComponent(serviceType) ? _container.Resolve(serviceType) : null;
-        }
-
-        public IEnumerable<object> GetServices(Type serviceType)
-        {
-            return _container.Kernel.HasComponent(serviceType) ? _container.ResolveAll(serviceType).Cast<object>() : new object[] { };
+            return _container.Resolve(controllerType) as IController;
         }
 
         private IWindsorContainer _container;

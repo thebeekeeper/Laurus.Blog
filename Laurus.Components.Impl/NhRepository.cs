@@ -49,10 +49,10 @@ namespace Laurus.Components.Impl
 
 		private ISessionFactory CreateSessionFactory(Type mappedType)
 		{
-			return Fluently.Configure().Database(FluentNHibernate.Cfg.Db.MsSqlConfiguration.MsSql2008.ConnectionString("Server=localhost;Database=percepto;Trusted_Connection=True;"))
+			return Fluently.Configure().Database(FluentNHibernate.Cfg.Db.MsSqlConfiguration.MsSql2008.ConnectionString("Server=(local)\\SQLEXPRESS;Database=Laurus;Trusted_Connection=True;"))
 				.Mappings(m => m.FluentMappings.AddFromAssembly(mappedType.Assembly))
 				//.Mappings(m => m.FluentMappings.AddFromAssembly(System.Reflection.Assembly.LoadFrom("Laurus.Blog.Entity.dll")))
-				//.ExposeConfiguration(BuildSchema)
+                //.ExposeConfiguration(BuildSchema)
 				.BuildSessionFactory();
 		}
 
