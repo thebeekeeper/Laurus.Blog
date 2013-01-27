@@ -1,0 +1,16 @@
+﻿@model Laurus.Blog.Models.EntryModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Create Entry</h2>
+
+@using (Html.BeginForm("CreateEntry", "Create", FormMethod.Post))
+{
+    @*<input type="text" name="model.Title" id="Title" />
+    <textarea name="model.Content"></textarea>*@
+    @Html.EditorFor(Model => @Model)
+    <input type="submit" value="CreateEntry" />
+}
+

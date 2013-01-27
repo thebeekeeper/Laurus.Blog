@@ -19,6 +19,10 @@ namespace Laurus.Components.Impl
 			_session = _sessionFactory.OpenSession();
 		}
 
+        public NhRepository()
+        {
+        }
+
 		T IRepository.Read<T>(int id)
 		{
 			T rval = default(T);
@@ -49,9 +53,9 @@ namespace Laurus.Components.Impl
 
 		private ISessionFactory CreateSessionFactory(Type mappedType)
 		{
-			return Fluently.Configure().Database(FluentNHibernate.Cfg.Db.MsSqlConfiguration.MsSql2008.ConnectionString("Server=(local)\\SQLEXPRESS;Database=Laurus;Trusted_Connection=True;"))
+            var connStr = System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+			return Fluently.Configure().Database(FluentNHibernate.Cfg.Db.MsSqlConfiguration.MsSql2008.ConnectionString(connStr))
 				.Mappings(m => m.FluentMappings.AddFromAssembly(mappedType.Assembly))
-				//.Mappings(m => m.FluentMappings.AddFromAssembly(System.Reflection.Assembly.LoadFrom("Laurus.Blog.Entity.dll")))
                 //.ExposeConfiguration(BuildSchema)
 				.BuildSessionFactory();
 		}

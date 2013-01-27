@@ -34,7 +34,7 @@ namespace Laurus.Blog
             AuthConfig.RegisterAuth();
 
             IWindsorContainer container = new WindsorContainer();
-            container.Register(AllTypes.FromThisAssembly().BasedOn(typeof(Controller)).LifestylePerWebRequest());
+            container.Register(AllTypes.FromThisAssembly().BasedOn(typeof(Controller)).LifestyleTransient());
             container.Register(Component.For<IBlogService>().ImplementedBy<BlogService>());
 			container.Register(Component.For<IRepository>().ImplementedBy<NhRepository>().LifestylePerWebRequest());
 			container.Register(Component.For<Type>().Instance(typeof(Laurus.Blog.Entity.Blog)));

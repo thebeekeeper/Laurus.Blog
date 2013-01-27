@@ -41,23 +41,24 @@ namespace Laurus.Blog.Service.Impl
 			{
 				Content = entry.Content,
 				Name = entry.Title,
-				Id = new Random().Next(1000)
 			};
+            _repository.Persist(entity);
 			return entity.Id;
         }
 
 		void IBlogService.AddEntry(int blogId, DataContract.Entry entry)
 		{
+            var blog = _repository.Read<Entity.Blog>(blogId);
 			var entryEntity = new Entity.Entry()
 			{
 				Name = entry.Title,
 				Content = entry.Content,
-				//BlogId = blogId
+                Blog = blog
 			};
-			if (_repository.Query<Entity.Blog>().Where(x => x.Id == blogId).Any())
-			{
+            //if (_repository.Query<Entity.Blog>().Where(x => x.Id == blogId).Any())
+            //{
 				_repository.Persist(entryEntity);
-			}
+            //}
 		}
 
 		IEnumerable<DataContract.Entry> IBlogService.GetAllEntries()

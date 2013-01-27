@@ -17,6 +17,10 @@ namespace Laurus.Blog.Controllers
 
         public ViewResult Index()
         {
+            if (this.User.Identity.IsAuthenticated)
+            {
+                ViewBag.Message = String.Format("logged in as {0}", this.User.Identity.Name);
+            }
             //show blogs
             var allBlogs = _blogService.ListBlogs();
             return View(allBlogs);
