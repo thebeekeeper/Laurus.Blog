@@ -12,5 +12,6 @@ namespace Laurus.Blog.Entity
         public virtual string Name { get; set; }
         public virtual string Content { get; set; }
 		public virtual Blog Blog { get; set; }
+        public virtual DateTime Created { get; set; }
     }
 }

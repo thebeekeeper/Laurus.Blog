@@ -53,7 +53,8 @@ namespace Laurus.Blog.Service.Impl
 			{
 				Name = entry.Title,
 				Content = entry.Content,
-                Blog = blog
+                Blog = blog,
+                Created = entry.Created
 			};
             //if (_repository.Query<Entity.Blog>().Where(x => x.Id == blogId).Any())
             //{
@@ -74,12 +75,13 @@ namespace Laurus.Blog.Service.Impl
 		IEnumerable<DataContract.Entry> IBlogService.GetEntriesForBlog(int blogId)
 		{
 			var all = _repository.Query<Entity.Entry>().ToList();
-			return from b in _repository.Query<Entity.Entry>().Where(e => e.Blog.Id == blogId)
+			return (from b in _repository.Query<Entity.Entry>().Where(e => e.Blog.Id == blogId)
 				   select new DataContract.Entry()
 				   {
+                       Id = b.Id,
 					   Title = b.Name,
 					   Content = b.Content
-				   };
+				   }).OrderByDescending(x => x.Id);
 		}
 
 		DataContract.Blog IBlogService.GetBlog(int id)
@@ -91,6 +93,18 @@ namespace Laurus.Blog.Service.Impl
 				Id = entity.Id
 			};
 		}
+
+        DataContract.Entry IBlogService.GetEntry(int id)
+        {
+            var entity = _repository.Read<Entity.Entry>(id);
+            return new DataContract.Entry()
+            {
+                Title = entity.Name,
+                Content = entity.Content,
+                Id = entity.Id,
+                Created = entity.Created
+            };
+        }
 
         private IRepository _repository;
     }

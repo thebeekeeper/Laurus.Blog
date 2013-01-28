@@ -28,9 +28,10 @@ namespace Laurus.Blog.Controllers
             {
                 Title = model.Title,
                 Content = model.Content,
-                OwnerDisplayName = this.User.Identity.Name
+                OwnerDisplayName = this.User.Identity.Name,
+                Created = DateTime.Now
             });
-            return Redirect("/");
+            return Redirect("/Entries");
         }
 
         private IBlogService _blogService;

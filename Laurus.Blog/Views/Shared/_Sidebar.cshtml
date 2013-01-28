@@ -1,0 +1,17 @@
+﻿@*@model Laurus.Blog.Models.Sidebar*@
+
+@*<div style="float: left; width:200px;">*@
+<div class="span2">
+    <div class="well sidebar-nav">
+        @*    <h1>@Model.Title</h1>
+    <h4>@Model.TagLine</h4>
+    @foreach(var m in @Model.Links)
+    {
+        <div>@Html.ActionLink(@m.DisplayText, "Index", "Category", new { id = @m.CategoryId }, null)</div>
+    }*@
+        <ul class="nav nav-list">
+            <li class="nav-header"><a href="~/">things</a></li>
+            <li><a href="~/Category/Index/1">default</a></li>
+        </ul>
+    </div>
+</div>

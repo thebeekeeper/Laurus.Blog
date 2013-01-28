@@ -16,5 +16,6 @@ namespace Laurus.Blog.Service
 		IEnumerable<DataContract.Entry> GetAllEntries();
 		DataContract.Blog GetBlog(int id);
 		IEnumerable<DataContract.Entry> GetEntriesForBlog(int blogId);
+        DataContract.Entry GetEntry(int id);
     }
 }

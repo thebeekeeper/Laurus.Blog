@@ -5,8 +5,8 @@
 
 @*    @Html.Action("_Sidebar")*@
 
-<h2>entries</h2>
-    @foreach(var m in Model)
+<h2>@ViewBag.Message</h2>
+  @foreach(var m in Model)
     {
         <h3>@Html.ActionLink(@m.Title, "Details", new { id = @m.Id })</h3>
         <div>

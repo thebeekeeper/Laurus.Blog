@@ -8,8 +8,10 @@ namespace Laurus.Blog.Service.DataContract
 {
 	public class Entry
 	{
+        public int Id { get; set; }
 		public string Title { get; set; }
 		public string OwnerDisplayName { get; set; }
 		public string Content { get; set; }
+        public DateTime Created { get; set; }
 	}
 }

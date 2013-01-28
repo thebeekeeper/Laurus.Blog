@@ -26,6 +26,8 @@ namespace Laurus.Blog.Entity.Mapping
 			Id(x => x.Id);
 			Map(x => x.Name);
 			Map(x => x.Content);
+            //Map(x => x.Created).CustomType("Timestamp");
+            Map(x => x.Created);
 			References(x => x.Blog);
 		}
 	}
